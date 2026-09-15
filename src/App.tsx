@@ -16,7 +16,6 @@ import { DataSourcesCatalogView } from './views/DataSourcesCatalogView';
 import { CopilotView } from './views/CopilotView';
 import { GISMapView } from './views/GISMapView';
 import { OfflineIndicator } from './components/OfflineIndicator';
-import { LoginScreen } from './components/LoginScreen';
 import { useAuth } from './hooks/useAuth';
 import { ProjectRecord, AlertItem, DataSourceProvenance, UserRole } from './types';
 
@@ -44,6 +43,7 @@ export default function App() {
 
   const fetchData = async () => {
     try {
+      console.log("Fetching data with public rules...");
       const { collection, getDocs, doc, getDoc } = await import('firebase/firestore');
       const { db } = await import('./lib/firebase');
       const { seedDatabaseIfNeeded } = await import('./lib/seed');
@@ -243,10 +243,6 @@ export default function App() {
         Initializing InfraShield Security...
       </div>
     );
-  }
-
-  if (!user) {
-    return <LoginScreen />;
   }
 
   return (

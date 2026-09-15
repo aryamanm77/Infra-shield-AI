@@ -140,20 +140,12 @@ export const Sidebar: React.FC<Props> = ({
         </div>
       </div>
 
-      {/* System Integrity Badge & Logout */}
+      {/* System Integrity Badge */}
       <div className="p-3 border-t border-slate-800/80 text-[11px] flex items-center justify-between">
         <div className="flex items-center space-x-1.5 text-slate-400">
           <Layers className="w-3.5 h-3.5 text-emerald-400" />
           <span>v1.4 Engine</span>
         </div>
-        <button 
-          onClick={() => {
-            import('../lib/firebase').then(m => m.signOut());
-          }}
-          className="text-rose-400 hover:text-rose-300 font-medium px-2 py-1 rounded hover:bg-slate-800 transition-colors"
-        >
-          Sign Out
-        </button>
       </div>
     </aside>
   );

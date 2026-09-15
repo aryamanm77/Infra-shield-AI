@@ -1,0 +1,6 @@
+{
+  "name": "InfraShield AI",
+  "description": "AI-powered infrastructure project early-warning and decision-support platform for government and infrastructure project officers.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

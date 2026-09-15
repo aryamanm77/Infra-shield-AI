@@ -17,19 +17,19 @@ function getGeminiClient(): GoogleGenAI | null {
   return aiClient;
 }
 
-export async function askOfficerCopilot(query: string, contextProjectId?: string): Promise<{
+export async function askOfficerCopilot(query: string, contextProjectId?: string, activeProjects?: any[]): Promise<{
   answer: string;
   citedProjects: { id: string; name: string; risk: number; status: string }[];
   sources: { dataset: string; organization: string; url: string }[];
   model_used: string;
 }> {
-  const projects = db.getProjects();
+  const projects = activeProjects || db.getProjects();
   const clearances = db.getClearances();
   const alerts = db.getAlerts();
   const dataSources = db.getDataSources();
 
   // Selected project context if provided
-  const targetProject = contextProjectId ? db.getProjectById(contextProjectId) : null;
+  const targetProject = contextProjectId ? projects.find(p => p.project_id === contextProjectId || p.id === contextProjectId) : null;
 
   // Build grounding context payload
   const databaseDigest = {
@@ -99,7 +99,7 @@ ${JSON.stringify(databaseDigest, null, 2)}
 
   try {
     const response = await client.models.generateContent({
-      model: 'gemini-2.5-flash',
+      model: 'gemini-3.8-flash',
       contents: userPrompt,
       config: {
         systemInstruction,

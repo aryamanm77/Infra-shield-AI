@@ -260,11 +260,11 @@ async function startServer() {
 
   // 12. AI Officer Copilot
   app.post('/api/copilot', async (req, res) => {
-    const { query, projectId } = req.body;
+    const { query, projectId, activeProjects } = req.body;
     if (!query || typeof query !== 'string') {
       return res.status(400).json({ error: 'Query string is required' });
     }
-    const copilotResult = await askOfficerCopilot(query, projectId);
+    const copilotResult = await askOfficerCopilot(query, projectId, activeProjects);
     res.json(copilotResult);
   });
 

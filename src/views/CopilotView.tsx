@@ -48,7 +48,7 @@ export const CopilotView: React.FC<Props> = ({ contextProjectId, projects, onSel
       const res = await fetch('/api/copilot', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query, projectId: contextProjectId })
+        body: JSON.stringify({ query, projectId: contextProjectId, activeProjects: projects })
       });
       
       const data = await res.json();
